@@ -255,3 +255,45 @@ Generates a packed global grid representing crescent visibility categories for m
 ```
 
 *Note: The `grid` elements are packed 1-byte values containing the category codes. The lower 4 bits represent the Yallop category code (`0` to `5`), and the upper 4 bits represent the Odeh category code (`0` to `5`).*
+
+---
+
+## 5. Eclipse Prediction API
+
+Calculates solar and lunar eclipse catalogs and local visibility circumstances for a given observer.
+
+* **Endpoints:**
+  * `GET /api/eclipse/local` - Local circumstances for an observer location.
+  * `GET /api/eclipse/global` - Global eclipse events catalog.
+  * `POST /api/eclipse/local`
+  * `POST /api/eclipse/global`
+
+### Request Parameters (`/api/eclipse/local`)
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `lat` | Float | Yes | Latitude of the observer (`-90.0` to `90.0`). |
+| `lng` | Float | Yes | Longitude of the observer (`-180.0` to `180.0`). |
+| `elv` | Float | No | Elevation above sea level in meters. |
+| `tz` | Float | No | Timezone offset in hours from UTC. |
+| `start_year` | Integer | No | Start year for calculations (Default: current year). |
+| `end_year` | Integer | No | End year for calculations (Default: current year + 2). |
+
+---
+
+## 6. Eclipse Map API
+
+Generates high-precision GeoJSON vector data containing totality/annularity shadow corridors, penumbra obscuration limits (>0%, >50%, <100%), and centerline tracks for 2D maps and 3D WebGL globes.
+
+* **Endpoints:**
+  * `GET /api/eclipse/map`
+  * `POST /api/eclipse/map`
+  * `GET /api/eclipse/pin` - Point-in-polygon local contact calculation.
+  * `POST /api/eclipse/pin`
+
+### Request Parameters (`/api/eclipse/map`)
+
+| Parameter | Type | Required | Description |
+| :--- | :--- | :--- | :--- |
+| `event_id` | String | Yes | Eclipse event identifier (e.g. `20270802_SolarTotal`, `20260812_SolarTotal`). |
+

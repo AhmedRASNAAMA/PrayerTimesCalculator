@@ -51,8 +51,12 @@ This repository contains precompiled, ready-to-run binary packages for various p
    * *📺 **شاشة تلفاز أنيقة**: عرض لافتات رقمية بأسلوب المساجد يوضح الأوقات المحلية، وأسماء المساجد المخصصة، والتاريخ الهجري، ومواقيت الصلاة، والعد التنازلي للإقامة، وإعلانات قابلة للتخصيص، وتنبيهات صوتية.*
 * ⚙️ **Web Dashboard**: An administration panel accessible via any web browser on your network to modify locations, coordinates, offsets, active themes, colors, and audio options.
    * *⚙️ **لوحة تحكم عبر الويب**: لوحة إدارة يمكن الوصول إليها عبر أي متصفح ويب على شبكتك لتعديل المواقع، والإحداثيات، وتعديلات الوقت، والقوالب النشطة، والألوان، والخيارات الصوتية.*
-* 🌙 **Lunar Crescent API**: Predicts new moon crescent visibility based on astronomical criteria (Yallop and Odeh models), and generates global visibility grid maps.
-   * *🌙 **واجهة برمجة تطبيقات (API) للهلال**: تتوقع رؤية هلال القمر الجديد بناءً على المعايير الفلكية (نماذج يالوب وعودة)، وتنشئ خرائط شبكية عالمية للرؤية.*
+* 🌙 **Lunar Crescent API & Map**: Predicts new moon crescent visibility based on astronomical criteria (Yallop and Odeh models), and generates global visibility grid maps.
+   * *🌙 **واجهة برمجة وحسابات الهلال**: تتوقع رؤية هلال القمر الجديد بناءً على المعايير الفلكية (نماذج يالوب وعودة)، وتنشئ خرائط شبكية عالمية للرؤية.*
+* ☀️ **Solar & Lunar Eclipse Engine**: Computes comprehensive eclipse circumstances (Besselian elements), local contact times (C1, Max, C4), obscuration percentages, and interactive 2D maps & 3D WebGL globes with shadow corridors.
+   * *☀️ **محرك كسوف الشمس وخسوف القمر**: حساب متقدم لظواهر الكسوف والخسوف بدقة العناصر البيسلية، ومواعيد التماس الموقعي، ونسب الاحتجاب، مع خريطة تفاعلية ومجسم كرة أرضية 3D لمسارات الظل والاحتجاب.*
+* 📱 **Android Phone App & Desktop Widget**: Native mobile experience with GPS location detection, Qibla compass, offline calculations, and an interactive home screen desktop widget with dynamic countdowns.
+   * *📱 **تطبيق هواتف أندرويد وودجت سطح المكتب**: تجربة محمولة متكاملة تدعم تحديد الموقع التلقائي (GPS)، بوصلة القبلة، والعمل دون إنترنت، مع أداة ذكية للشاشة الرئيسية (Widget) بعدّ تنازلي مباشر.*
 * ⚡ **High Performance**: Built with Rust, meaning low memory usage (typically less than 15MB RAM) and extremely fast execution.
    * *⚡ **أداء عالي**: مبني بلغة Rust، مما يعني استهلاكاً منخفضاً للذاكرة (عادة أقل من 15 ميغابايت من ذاكرة الوصول العشوائي) وتنفيذاً سريعاً للغاية.*
 
@@ -132,10 +136,19 @@ Select your platform below to set up and run the application:
 
 ### 4. 📺 Android TV / أجهزة التلفاز أندرويد
 
-There are two primary methods to display the prayer times on an Android TV:
-*هناك طريقتان أساسيتان لعرض مواقيت الصلاة على أجهزة تلفاز أندرويد:*
+There are three primary methods to display the prayer times on an Android TV:
+*هناك ثلاث طرق أساسية لعرض مواقيت الصلاة على أجهزة تلفاز أندرويد:*
 
-#### Method A: Networked Mode (Recommended / موصى بها)
+#### Method A: Google Play Store App (Recommended / موصى بها)
+Download and install the dedicated native Android TV app directly from the Google Play Store on your Smart TV:
+*تحميل وتثبيت تطبيق تلفاز أندرويد المخصص مباشرة من متجر Google Play على شاشتك الذكية:*
+* 1. Search for **"Prayer Times TV"** on the Google Play Store on your Android TV, or open this direct link:
+   * *ابحث عن **"Prayer Times TV"** في متجر Google Play على تلفاز أندرويد، أو افتح الرابط المباشر:*
+   https://play.google.com/store/apps/details?id=com.BestDevelopers.PrayerTimesTV
+* 2. Install and launch the application. It includes the built-in calculation engine, automatic startup, full-screen display, and offline support with zero configuration required.
+   * *قم بتثبيت التطبيق وتشغيله. يحتوي التطبيق على محرك حساب فلكي مدمج، تشغيل تلقائي عند الإقلاع، وعرض ملء الشاشة دون الحاجة إلى اتصال بالإنترنت أو إعدادات معقدة.*
+
+#### Method B: Networked Mode (Via TV Browser / عبر متصفح التلفاز)
 Run the server on a local PC, Raspberry Pi, or your phone on your home/mosque Wi-Fi network, and use the TV simply as a viewer.
 *قم بتشغيل الخادم على جهاز كمبيوتر محلي، أو راسبري باي، أو هاتفك على شبكة الواي فاي الخاصة بالمنزل/المسجد، واستخدم التلفاز كشاشة عرض فقط.*
 * 1. Start the server on your local PC or Pi (e.g. at `http://192.168.1.100:8080`).
@@ -145,7 +158,7 @@ Run the server on a local PC, Raspberry Pi, or your phone on your home/mosque Wi
 * 3. Type the URL `http://<YOUR-SERVER-IP>:8080/tv` inside the TV browser and switch it to full-screen.
    * *اكتب الرابط `http://<YOUR-SERVER-IP>:8080/tv` داخل متصفح التلفاز وقم بتحويله إلى وضع ملء الشاشة.*
 
-#### Method B: Standalone Mode (Advanced / للمحترفين)
+#### Method C: Standalone Mode (Advanced / للمحترفين عبر Termux)
 Run the server directly on the Android TV without needing another computer.
 *قم بتشغيل الخادم مباشرة على تلفاز أندرويد دون الحاجة إلى جهاز كمبيوتر آخر.*
 * 1. Sideload the **Termux** app on your Android TV.
@@ -201,6 +214,10 @@ Alternatively, configurations can be directly edited inside the **`tv_config.jso
    * *3. واجهة رصد الهلال: تتوقع رؤية هلال القمر الجديد وبداية الشهر الهجري لنطاق زمني محدد.*
 * 4. Global Visibility Map API: Generates a packed global grid representing crescent visibility categories for mapping engines (like Leaflet).
    * *4. واجهة خريطة الرؤية العالمية: تنشئ شبكة عالمية مضغوطة تمثل فئات رؤية الهلال لمحركات الخرائط (مثل Leaflet).*
+* 5. Eclipse Prediction API: Computes global solar and lunar eclipse catalogs, Besselian elements, and local eclipse visibility circumstances (contact milestones C1, Max, C4 and obscuration percentage) for any geographic coordinates.
+   * *5. واجهة توقع وحساب الكسوف والخسوف: تحسب قوائم كسوف الشمس وخسوف القمر العالمية، العناصر البيسلية، وظروف الرؤية المحلية (مواعيد التماس C1، الأقصى، C4 ونسبة الاحتجاب) لأي إحداثيات جغرافية.*
+* 6. Eclipse Map API: Generates high-precision GeoJSON vector data containing totality/annularity shadow corridors, penumbra obscuration limits (>0%, >50%, <100%), and centerline tracks for 2D interactive maps and 3D WebGL globes.
+   * *6. واجهة خريطة الكسوف التفاعلية: تنشئ بيانات متجهة عالية الدقة بتنسيق GeoJSON تتضمن مسارات الظل التام/الحلقي، وحدود شبه الظل ونسب الاحتجاب (>0%، >50%، <100%)، وخط المركز للخرائط التفاعلية والمجسمات الكروية ثلاثية الأبعاد (3D Globe).*
 
 ---
 
